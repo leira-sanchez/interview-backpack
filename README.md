@@ -145,6 +145,11 @@ Get an account owner’s transactions.
 
 
 ## How to Run
+
+## Pre-Requisites
+Requires node 21 or higher to run. I'm using `nvm` to manage my node versions but you can also use volta or manage it manually.
+
+## Steps
 1. Create a `.env.local` file in the root directory and add `NEXT_PUBLIC_API_ROOT=https://api.dev.backpackpay.com/api/v1/mocks`
 1. Run `npm i`
 1. Run `npm run dev`
@@ -159,3 +164,19 @@ Get an account owner’s transactions.
     I like Tailwind for prototyping quickly. I even used it at my last job and in my current side project. It makes it easy to have light/dark modes and to develop for desktop and mobile. The colors and design system are also easy to customize. My other choice would've been Styled-Components but that would've taken me longer
 1. **Shadcn-ui** -
     In the spirit of speed, I used shadcn-ui components. They're easy to customize and make developing accessible components faster. I build some components from scratch and used shadcn-ui as a base for others. I took some icons from radix-ui as well. They're both compatible with Tailwind.
+
+    ### Transactions
+
+    #### Desktop
+    ![Alt text](image.png)
+
+    #### Mobile
+![Alt text](image-4.png)
+
+    ### Bank Accounts
+
+    #### Desktop
+    ![Alt text](image-1.png)
+
+    #### Mobile
+    ![Alt text](image-2.png)

@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <div className="container">{children}</div>
+        <div className="sm:container">{children}</div>
         <Toaster />
       </body>
     </html>
