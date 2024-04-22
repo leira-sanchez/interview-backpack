@@ -17,7 +17,7 @@ The web application must be build using React. The rest is up to you.
 ## Requirements
 
 - [ ]  UI for displaying, concealing, and copying account and routing numbers
-- [ ]  UI for displaying the current and available balance
+- [x]  UI for displaying the current and available balance
 - [ ]  UI for displaying transactions
 - [ ]  `README` explaining your design choices and how to run the application
 

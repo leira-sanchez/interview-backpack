@@ -1,5 +1,5 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT;
@@ -34,7 +34,7 @@ const AccountCard = ({ account_number, id, name, routing_number, status }: Accou
 
   return (
     <Card
-      onClick={() => router.push(`/account-settings?${id}`)}
+      onClick={() => router.push(`/account-settings?id=${id}`)}
       className="p-4 flex flex-col gap-4 w-fit bg-primary text-white cursor-pointer"
     >
       <CardTitle>{name}</CardTitle>
