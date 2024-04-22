@@ -60,7 +60,7 @@
     @apply text-sm font-light;
   }
 
-  p#info {
+  .info {
     @apply text-[12px] font-light;
   }
 }

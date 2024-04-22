@@ -175,7 +175,9 @@ export default function Account() {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Account Details</DialogTitle>
-              <DialogDescription>Be safe with your data</DialogDescription>
+              <DialogDescription className="info text-[12px]">
+                Be safe with your data
+              </DialogDescription>
             </DialogHeader>
             <div className="flex gap-4 justify-around">
               <label>Account Number</label>
