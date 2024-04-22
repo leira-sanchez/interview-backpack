@@ -4,6 +4,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import CopyToClipBoard from "@/components/ui/CopyToClipBoard";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT;
 
@@ -37,7 +38,7 @@ const AccountSettings = () => {
   return (
     <Card
       onClick={() => router.push("/account-settings")}
-      className="p-4 flex w-full sm:w-1/2 flex-col gap-4 bg-primary text-white mx-auto mt-4"
+      className="p-4 flex w-full sm:w-1/2 flex-col gap-4 border-primary mx-auto mt-4"
     >
       <CardTitle>{account?.name}</CardTitle>
       <CardContent>
@@ -49,7 +50,7 @@ const AccountSettings = () => {
           {showAccountNumber ? (
             <span className="flex gap-2 items-center">
               <p>{account?.account_number}</p>
-              <Button variant="ghost" onClick={() => setShowAccountNumber(false)}>
+              <button onClick={() => setShowAccountNumber(false)}>
                 <svg
                   width="15"
                   height="15"
@@ -64,12 +65,13 @@ const AccountSettings = () => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </Button>
+              </button>
+              <CopyToClipBoard text={account?.account_number!} />
             </span>
           ) : (
-            <span className="flex gap items-baseline">
+            <span className="flex gap-2 items-baseline">
               <p>*********</p>
-              <Button variant="ghost" onClick={() => setShowAccountNumber(true)}>
+              <button onClick={() => setShowAccountNumber(true)}>
                 <svg
                   width="15"
                   height="15"
@@ -84,13 +86,15 @@ const AccountSettings = () => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </Button>
+              </button>
+              <CopyToClipBoard text={account?.account_number!} />
             </span>
           )}
+
           {showRoutingNumber ? (
             <span className="flex gap-2 items-center">
               <p>{account?.routing_number}</p>
-              <Button variant="ghost" onClick={() => setShowRoutingNumber(false)}>
+              <button onClick={() => setShowRoutingNumber(false)}>
                 <svg
                   width="15"
                   height="15"
@@ -105,12 +109,13 @@ const AccountSettings = () => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </Button>
+              </button>
+              <CopyToClipBoard text={account?.routing_number!} />
             </span>
           ) : (
             <span className="flex gap-2 items-center">
               <p>*********</p>
-              <Button variant="ghost" onClick={() => setShowRoutingNumber(true)}>
+              <button onClick={() => setShowRoutingNumber(true)}>
                 <svg
                   width="15"
                   height="15"
@@ -125,7 +130,8 @@ const AccountSettings = () => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </Button>
+              </button>
+              <CopyToClipBoard text={account?.routing_number!} />
             </span>
           )}
         </div>
