@@ -167,18 +167,18 @@ Requires node 21 or higher to run. I'm using `nvm` to manage my node versions bu
 1. **Shadcn-ui** -
     In the spirit of speed, I used shadcn-ui components. They're easy to customize and make developing accessible components faster. I build some components from scratch and used shadcn-ui as a base for others. I took some icons from radix-ui as well. They're both compatible with Tailwind.
 
-    ### Transactions
+### Transactions
 
-    #### Desktop
-    ![transactions page on desktop](/public/image.png)
+#### Desktop
+![transactions page on desktop](/public/image.png)
 
-    #### Mobile
+#### Mobile
 ![transactions page on mobile](/public/image-4.png)
 
-    ### Bank Accounts
+### Bank Accounts
 
-    #### Desktop
-    ![bank account card on desktop](/public/image-1.png)
+#### Desktop
+![bank account card on desktop](/public/image-1.png)
 
-    #### Mobile
-    ![bank account card on mobile](/public/image-2.png)
+#### Mobile
+![bank account card on mobile](/public/image-2.png)
