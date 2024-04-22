@@ -11,18 +11,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Table,
   TableBody,
@@ -33,7 +23,6 @@ import {
 } from "@/components/ui/table";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import AccountSettings from "../account-settings/page";
 import CopyToClipBoard from "../../components/ui/CopyToClipBoard";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT;
@@ -54,15 +43,36 @@ type Transaction = {
   amount_in_cents: string;
 };
 
+type AccountDetails = {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  status: string;
+  name: string;
+  account_number: string;
+  routing_number: string;
+};
+
 export default function Account() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const [account, setAccount] = useState<AccountSettings | null>();
+  const [account, setAccount] = useState<AccountDetails | null>();
   const [showAccountNumber, setShowAccountNumber] = useState(false);
   const [showRoutingNumber, setShowRoutingNumber] = useState(false);
   const [balance, setBalance] = useState<Balance | null>();
   const [transactions, setTransactions] = useState<Transaction[] | null>();
+  const [filteredTransactions, setFilteredTransactions] = useState<
+    Transaction[] | null | undefined
+  >(transactions);
+
+  const searchTransactions = (e: any) => {
+    const searchTerm = e.target.value;
+    const searchResults = transactions?.filter((transaction: Transaction) =>
+      transaction?.description.includes(searchTerm)
+    );
+    setFilteredTransactions(searchResults);
+  };
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -76,6 +86,7 @@ export default function Account() {
     const fetchTransactions = async () => {
       const { data } = await (await fetch(`${BASE_URL}/transactions`)).json();
       setTransactions(data.transactions);
+      setFilteredTransactions(data.transactions);
     };
     fetchTransactions();
   }, []);
@@ -88,17 +99,21 @@ export default function Account() {
     fetchAccountDetails();
   }, []);
 
-  const allTransactions = transactions?.map((transaction: Transaction) => (
+  const allTransactions = filteredTransactions?.map((transaction: Transaction) => (
     <TableRow>
       <TableCell>
         <div className="font-medium">{transaction?.description}</div>
-        <div className="hidden text-sm text-muted-foreground md:inline">{transaction?.date}</div>
+        <div className="hidden text-muted md:inline">{transaction?.date}</div>
       </TableCell>
       <TableCell>
-        <p>{transaction?.type}</p>
+        <p
+          className={`${Number(transaction?.amount_in_cents) / 100 < 0 ? "text-destructive" : "text-black"}`}
+        >
+          {transaction?.type}
+        </p>
       </TableCell>
       <TableCell
-        className={`${transaction?.type === "WITHDRAWAL" ? "text-destructive" : "text-black"}`}
+        className={`${Number(transaction?.amount_in_cents) / 100 < 0 ? "text-destructive" : "text-black"}`}
       >
         {Number(transaction?.amount_in_cents) / 100}
       </TableCell>
@@ -110,8 +125,8 @@ export default function Account() {
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
         <Card x-chunk="dashboard-01-chunk-0">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <label className="text-sm font-medium">Available Balance</label>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <label>Available Balance</label>
+            <DollarSign className="h-4 w-4 text-muted" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -121,8 +136,8 @@ export default function Account() {
         </Card>
         <Card x-chunk="dashboard-01-chunk-1">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <label className="text-sm font-medium">Pending Balance</label>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <label>Pending Balance</label>
+            <DollarSign className="h-4 w-4 text-muted" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
@@ -133,10 +148,10 @@ export default function Account() {
         <Dialog>
           <DialogTrigger>
             <Card x-chunk="dashboard-01-chunk-1">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <label className="text-sm font-medium">Account Details</label>
+              <CardHeader className="flex flex-row items-center rounded-t-lg bg-primary justify-between space-y-0 pb-2">
+                <label className="text-white ">Account Details</label>
                 <svg
-                  className="h-4 w-4 text-muted-foreground"
+                  className="h-4 w-4 text-white"
                   width="15"
                   height="15"
                   viewBox="0 0 15 15"
@@ -152,7 +167,7 @@ export default function Account() {
                 </svg>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{account?.name}</div>
+                <div className="pt-4 text-2xl font-bold">{account?.name}</div>
               </CardContent>
             </Card>
           </DialogTrigger>
@@ -260,18 +275,21 @@ export default function Account() {
       </div>
       <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
         <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-          <CardHeader className="flex flex-row items-center">
+          <CardHeader className="flex bg-secondary rounded-t-lg flex-row items-center">
             <div className="grid gap-2">
-              <CardTitle>Transactions</CardTitle>
-              <CardDescription>Recent transactions on your account.</CardDescription>
+              <CardTitle className="text-white">Transactions</CardTitle>
+              <CardDescription className="text-white">
+                Recent transactions on your account.
+              </CardDescription>
             </div>
             <form className="ml-auto flex-1 sm:flex-initial">
               <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted" />
                 <Input
                   type="search"
                   placeholder="Search transactions..."
-                  className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                  className="text-muted pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                  onChange={searchTransactions}
                 />
               </div>
             </form>
@@ -280,9 +298,9 @@ export default function Account() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Vendor</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Amount ($)</TableHead>
+                  <TableHead className="text-muted">Vendor</TableHead>
+                  <TableHead className="text-muted">Type</TableHead>
+                  <TableHead className="text-muted">Amount ($)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>{allTransactions}</TableBody>

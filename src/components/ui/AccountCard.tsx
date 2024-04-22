@@ -20,7 +20,7 @@ type Balance = {
   pending_balance_in_cents: string;
 };
 
-const AccountCard = ({ account_number, id, name, routing_number, status }: AccountCardProps) => {
+const AccountCard = ({ id, name, status }: AccountCardProps) => {
   const router = useRouter();
   const [balance, setBalance] = useState<Balance | null>();
 

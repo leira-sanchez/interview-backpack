@@ -24,9 +24,6 @@ const Header = () => {
           <Link href="/">
             <li>Accounts</li>
           </Link>
-          <Link href="/about">
-            <li>About</li>
-          </Link>
         </ul>
       </nav>
 
@@ -57,18 +54,6 @@ const Header = () => {
             <div className="flex flex-col gap-4 p-4">
               <Button onClick={() => router.push("/")} variant="outline" className="w-full">
                 Accounts
-              </Button>
-              <Button
-                className="w-full text-white"
-                onClick={() => router.push("/account-settings")}
-              >
-                Account Settings
-              </Button>
-              <Button
-                className="w-full text-white bg-secondary"
-                onClick={() => router.push("/transactions")}
-              >
-                Transactions
               </Button>
             </div>
           </DropdownMenuContent>
