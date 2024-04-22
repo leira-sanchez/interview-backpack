@@ -2,6 +2,8 @@
 
 As part of Backpack’s application process we would like to see a sample of your work. This prompt should take between 10 - 15 hours to complete.
 
+Design choices and screenshots at the bottom.
+
 ## Prompt
 
 Backpack is a financial institution that at its core deals with bank accounts, balances, and transactions. In this prompt you will build a UI that displays a customer’s bank account and routing numbers, available and pending balances, and transactions.
