@@ -34,7 +34,7 @@ const AccountCard = ({ account_number, id, name, routing_number, status }: Accou
 
   return (
     <Card
-      onClick={() => router.push(`/account-settings?id=${id}`)}
+      onClick={() => router.push(`/account?id=${id}`)}
       className="p-4 flex flex-col gap-4 w-fit bg-primary text-white cursor-pointer"
     >
       <CardTitle>{name}</CardTitle>

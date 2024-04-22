@@ -27,12 +27,11 @@ const AccountSettings = () => {
   const [showRoutingNumber, setShowRoutingNumber] = useState(false);
 
   useEffect(() => {
-    const fetchBalance = async () => {
+    const fetchAccountDetails = async () => {
       const { data } = await (await fetch(`${BASE_URL}/bank-accounts?id=${id}`)).json();
-      console.log({ data });
       setAccount(data.bank_accounts[0]);
     };
-    fetchBalance();
+    fetchAccountDetails();
   }, []);
 
   return (
