@@ -178,7 +178,7 @@ Requires node 21 or higher to run. I'm using `nvm` to manage my node versions bu
     ### Bank Accounts
 
     #### Desktop
-    ![bank account card on desktop](/publicimage-1.png)
+    ![bank account card on desktop](/public/image-1.png)
 
     #### Mobile
-    ![bank account card on mobile](/publicimage-2.png)
+    ![bank account card on mobile](/public/image-2.png)
