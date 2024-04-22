@@ -37,7 +37,7 @@ const AccountSettings = () => {
   return (
     <Card
       onClick={() => router.push("/account-settings")}
-      className="p-4 flex w-1/2 flex-col gap-4 bg-primary text-white mx-auto mt-4"
+      className="p-4 flex w-full sm:w-1/2 flex-col gap-4 bg-primary text-white mx-auto mt-4"
     >
       <CardTitle>{account?.name}</CardTitle>
       <CardContent>
