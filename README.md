@@ -168,15 +168,15 @@ Requires node 21 or higher to run. I'm using `nvm` to manage my node versions bu
     ### Transactions
 
     #### Desktop
-    ![Alt text](image.png)
+    ![transactions page on desktop](/public/image.png)
 
     #### Mobile
-![Alt text](image-4.png)
+![transactions page on mobile](/public/image-4.png)
 
     ### Bank Accounts
 
     #### Desktop
-    ![Alt text](image-1.png)
+    ![bank account card on desktop](/publicimage-1.png)
 
     #### Mobile
-    ![Alt text](image-2.png)
+    ![bank account card on mobile](/publicimage-2.png)
