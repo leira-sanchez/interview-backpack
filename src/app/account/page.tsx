@@ -275,14 +275,14 @@ export default function Account() {
       </div>
       <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
         <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-          <CardHeader className="flex bg-secondary rounded-t-lg flex-row items-center">
-            <div className="grid gap-2">
+          <CardHeader className="flex bg-secondary flex-col rounded-t-lg w-full justify-center sm:justify-between sm:flex-row items-center">
+            <div className="mx-auto sm:mx-0 text-center sm:text-left gap-2">
               <CardTitle className="text-white">Transactions</CardTitle>
               <CardDescription className="text-white">
                 Recent transactions on your account.
               </CardDescription>
             </div>
-            <form className="ml-auto flex-1 sm:flex-initial">
+            <form className="mx-auto sm:mx-0 flex sm:flex-">
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted" />
                 <Input
