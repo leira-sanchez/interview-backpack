@@ -1,5 +1,5 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_ROOT;
@@ -27,7 +27,6 @@ const AccountCard = ({ account_number, id, name, routing_number, status }: Accou
   useEffect(() => {
     const fetchBalance = async () => {
       const { data } = await (await fetch(`${BASE_URL}/bank-accounts/${id}/balance`)).json();
-      console.log({ data });
       setBalance(data.bank_account_balance);
     };
     fetchBalance();
@@ -35,7 +34,7 @@ const AccountCard = ({ account_number, id, name, routing_number, status }: Accou
 
   return (
     <Card
-      onClick={() => router.push("/account-settings")}
+      onClick={() => router.push(`/account-settings?${id}`)}
       className="p-4 flex flex-col gap-4 w-fit bg-primary text-white cursor-pointer"
     >
       <CardTitle>{name}</CardTitle>
