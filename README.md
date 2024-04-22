@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Introduction
 
-## Getting Started
+As part of Backpack’s application process we would like to see a sample of your work. This prompt should take between 10 - 15 hours to complete.
 
-First, run the development server:
+## Prompt
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Backpack is a financial institution that at its core deals with bank accounts, balances, and transactions. In this prompt you will build a UI that displays a customer’s bank account and routing numbers, available and pending balances, and transactions.
+
+Please create a separate repository for this prompt and commit your work as you go. When you are ready for us to review your work, give us access to your repository.
+
+If you have any questions please ask!
+
+## Tech Stack
+
+The web application must be build using React. The rest is up to you.
+
+## Requirements
+
+- [ ]  UI for displaying, concealing, and copying account and routing numbers
+- [ ]  UI for displaying the current and available balance
+- [ ]  UI for displaying transactions
+- [ ]  `README` explaining your design choices and how to run the application
+
+## Extras
+
+- [ ]  Reusable components
+- [ ]  Polished UI and styling
+- [ ]  Filter and search for transactions
+- [ ]  Mobile friendly
+- [ ]  Tests
+
+## API
+
+💡 The base path for the API is [**https://api.dev.backpackpay.com/api/v1/mocks**](https://api.dev.backpackpay.com/api/v1/mocks)
+
+### `GET /bank-accounts`
+
+Get an account owner’s bank accounts.
+
+**Response Body**
+
+```json
+{
+    data: {
+        bank_accounts: [
+            {
+                id,
+                created_at,
+                updated_at,
+                status,
+                name,
+                account_number,
+                routing_number
+            }
+        ],
+    },
+    request_id
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `GET /bank-accounts/:bank_account_id/balance`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Get a bank account’s balance.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Response Body**
 
-## Learn More
+```json
+{
+    data: {
+        bank_account_balance: {
+            bank_account_id,
+            available_balance_in_cents,
+            pending_balance_in_cents
+        }
+    },
+    request_id
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+### `GET /transactions`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Get an account owner’s transactions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Response Body**
 
-## Deploy on Vercel
+```json
+{
+    data: {
+        transactions: [
+            {
+                id,
+                created_at,
+                updated_at,
+                type,
+                date,
+                description,
+                amount_in_cents,
+            }
+        ]
+    },
+    request_id
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+💡 All debits have `amount_in_cents < 0` and credits have `amount_in_cents >= 0`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Design System
+
+### Core
+
+| Name | HEX |
+| --- | --- |
+| Primary | #033AFC |
+| Secondary | #24305B |
+
+### Shades
+
+| Name | HEX |
+| --- | --- |
+| White | #FFFFFF |
+| Black | #000000 |
+| Dark Grey | #5E5E5E |
+| Light Grey | #CFCFCF |
+
+### Warning Colors
+
+| Name | HEX |
+| --- | --- |
+| Red | #C44E42 |
+| Yellow | #FFCF20 |
+| Green | #608D64 |
+
+### Fonts
+
+| Type | Size | Weight |
+| --- | --- | --- |
+| H1 | 48 | Bold |
+| H2 | 38 | Bold |
+| H3 | 30 | Bold |
+| Body | 16 | Regular |
+| Label | 14 | Light |
+| Info | 12 | Light |
+
+*font-family: Montserrat*
