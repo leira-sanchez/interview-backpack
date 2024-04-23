@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import { ArrowUpRight, DollarSign, Menu, Search } from "lucide-react";
+import { DollarSign, Menu, Search } from "lucide-react";
 
 import {
   Dialog,
